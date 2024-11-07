@@ -6,21 +6,12 @@ public class ItemData
     public readonly string Name;
     public readonly string Description;
     public readonly List<MaterialNotes> MaterialNotes;
-    public readonly int Cost;
+    public readonly float Cost;
     public readonly int Discount;
     public readonly SpriteType BigSpriteType;
 
-    public ItemData()
-    {
-        Name = "";
-        Description = "";
-        MaterialNotes = null;
-        Cost = 0;
-        Discount = 0;
-    }
-
     public ItemData (string name, string description, List<MaterialNotes> materialNotes, 
-        int cost, int discount, SpriteType bigSpriteType)
+        float cost, int discount, SpriteType bigSpriteType)
     {
         Name = name;
         Description = description;
@@ -33,7 +24,9 @@ public class ItemData
 
 public enum SpriteType
 {
-
+    Wood = 1,
+    Tears = 2,
+    Sand = 3,
 }
 
 public class MaterialNotes
