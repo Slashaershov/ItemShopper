@@ -10,7 +10,7 @@ public class OptionScreen : BaseScreen
     [SerializeField] private TMP_InputField _name;
     [SerializeField] private Dropdown _bigSprite;
     [SerializeField] private TMP_InputField _description;
-    [SerializeField] private TMP_InputField _cost;
+    [SerializeField] private TMP_InputField _basePrice;
     [SerializeField] private Slider _discount;
     [SerializeField] private MaterialSlotsView _materials;
 
@@ -36,7 +36,7 @@ public class OptionScreen : BaseScreen
             return false;
         }
         SpriteType bigSprite;
-        if (!TryGetSpriteType(_bigSprite.itemText.text, out bigSprite))
+        if (!TryGetSpriteType(_bigSprite.options[_bigSprite.value].text, out bigSprite))
         {
             return false;
         }
@@ -48,7 +48,7 @@ public class OptionScreen : BaseScreen
 
     private bool TryGetCost(out float cost)
     {
-        return TryParseStringToFloat(_cost.text, out cost) && cost > 0;
+        return TryParseStringToFloat(_basePrice.text, out cost) && cost >= 0;
     }
 
     private bool TryParseStringToFloat(string str, out float res)

@@ -1,24 +1,34 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ItemData
 {
     public readonly string Name;
     public readonly string Description;
     public readonly List<MaterialNotes> MaterialNotes;
-    public readonly float Cost;
+    public readonly float BasePrice;
     public readonly int Discount;
     public readonly SpriteType BigSpriteType;
+    public float Cost => GetCost();
+
 
     public ItemData (string name, string description, List<MaterialNotes> materialNotes, 
-        float cost, int discount, SpriteType bigSpriteType)
+        float basePrice, int discount, SpriteType bigSpriteType)
     {
         Name = name;
         Description = description;
         MaterialNotes = materialNotes;
-        Cost = cost;
+        BasePrice = basePrice;
         Discount = discount;
         BigSpriteType = bigSpriteType;
+    }
+
+    private float GetCost()
+    {
+        var res = BasePrice * (100 - Discount) / 100;
+        res = (float)Math.Round(res, 2);
+        return res;
     }
 }
 

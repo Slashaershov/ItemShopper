@@ -4,7 +4,7 @@ using UnityEngine;
 public class BaseScreen : MonoBehaviour
 {
     [SerializeField] public ScreenType ScreenType { get; private set; }
-    public virtual void Show(ItemData ItemData)
+    public virtual void Show(ItemData itemData)
     {
         Show();
     }
