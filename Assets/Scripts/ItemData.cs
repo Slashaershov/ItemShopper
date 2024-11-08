@@ -6,15 +6,15 @@ public class ItemData
 {
     public readonly string Name;
     public readonly string Description;
-    public readonly List<MaterialNotes> MaterialNotes;
+    public readonly List<MaterialNote> MaterialNotes;
     public readonly float BasePrice;
     public readonly int Discount;
-    public readonly SpriteType BigSpriteType;
+    public readonly BigSpriteType BigSpriteType;
     public float Cost => GetCost();
 
 
-    public ItemData (string name, string description, List<MaterialNotes> materialNotes, 
-        float basePrice, int discount, SpriteType bigSpriteType)
+    public ItemData (string name, string description, List<MaterialNote> materialNotes, 
+        float basePrice, int discount, BigSpriteType bigSpriteType)
     {
         Name = name;
         Description = description;
@@ -32,19 +32,34 @@ public class ItemData
     }
 }
 
-public enum SpriteType
+public enum MaterialSpriteType
 {
-    Wood = 1,
-    Tears = 2,
+    Grass = 1,
+    Meat = 2,
     Sand = 3,
+    Stone = 4,
+    Wood = 5,
+
+    None = 999,
 }
 
-public class MaterialNotes
+public enum BigSpriteType
 {
-    public readonly SpriteType SpriteType;
+    ConstructionKit = 1,
+    BeginnerBuildersKit = 2,
+    Balls = 3,
+    MoneySuitcase = 4,
+    Pizza = 5,
+
+    None = 999,
+}
+
+public class MaterialNote
+{
+    public readonly MaterialSpriteType SpriteType;
     public readonly int Count;
 
-    public MaterialNotes(SpriteType spriteType, int count)
+    public MaterialNote(MaterialSpriteType spriteType, int count)
     {
         SpriteType = spriteType;
         Count = count;

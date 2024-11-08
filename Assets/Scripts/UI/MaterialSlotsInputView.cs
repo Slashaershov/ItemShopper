@@ -3,10 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MaterialSlotsView : MonoBehaviour
+public class MaterialSlotsInputView : MonoBehaviour
 {
     [SerializeField] private List<MaterialNoteView> _slots;
     [SerializeField] private Slider _slider;
+
+    public bool TryGetData(out List<MaterialNote> result)
+    {
+        result = new List<MaterialNote>();
+        foreach (var slot in _slots)
+        {
+            if (slot.gameObject.activeSelf)
+            {
+                MaterialNote newItem;
+                if (!slot.TryGetInfo(out newItem))
+                {
+                    return false;
+                }
+                result.Add(newItem);
+            }
+        }
+        return true;
+    }
 
     private void Start()
     {

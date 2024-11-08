@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class DropDownBySpriteEnumFiller : MonoBehaviour
+public abstract class DropDownBySpriteEnumFiller<T> : MonoBehaviour where T : Enum
 {
     [SerializeField] private Dropdown _dropDown;
 
@@ -16,7 +16,7 @@ public class DropDownBySpriteEnumFiller : MonoBehaviour
 
     private void FillDropDown()
     {
-        var enumValues = Enum.GetValues(typeof(SpriteType));
+        var enumValues = Enum.GetValues(typeof(T));
         foreach (var x in enumValues)
         {
             _dropDown.options.Add(new Dropdown.OptionData(x.ToString()));

@@ -12,7 +12,7 @@ public class OptionScreen : BaseScreen
     [SerializeField] private TMP_InputField _description;
     [SerializeField] private TMP_InputField _basePrice;
     [SerializeField] private Slider _discount;
-    [SerializeField] private MaterialSlotsView _materials;
+    [SerializeField] private MaterialSlotsInputView _materials;
 
     public void Generate()
     {
@@ -23,7 +23,7 @@ public class OptionScreen : BaseScreen
         }
         else
         {
-            Debug.LogError("Input data error");
+            throw new Exception("Input data error");
         }
     }
 
@@ -35,54 +35,33 @@ public class OptionScreen : BaseScreen
         {
             return false;
         }
-        SpriteType bigSprite;
-        if (!TryGetSpriteType(_bigSprite.options[_bigSprite.value].text, out bigSprite))
+        BigSpriteType bigSprite;
+        if (!TryGetBigSpriteType(out bigSprite))
         {
             return false;
         }
-        
-        var materials = GetMaterialNotes();
+
+        List<MaterialNote> materials;
+        if (!TryMaterialNotes(out materials))
+        {
+            return false;
+        }
         data = new ItemData(_name.text, _description.text, materials, cost, (int)_discount.value, bigSprite);
         return true;
     }
 
     private bool TryGetCost(out float cost)
     {
-        return TryParseStringToFloat(_basePrice.text, out cost) && cost >= 0;
+        return Parser.TryParse(_basePrice.text, out cost) && cost >= 0;
     }
 
-    private bool TryParseStringToFloat(string str, out float res)
+    private bool TryGetBigSpriteType(out BigSpriteType spriteType)
     {
-        try
-        {
-            res = float.Parse(str);
-            return true;
-        }
-        catch (FormatException e)
-        {
-            Debug.LogError($"Parse error: {e}");
-            res = 1;
-            return false;
-        }
+        return Parser.TryParse(_bigSprite.options[_bigSprite.value].text, out spriteType);
     }
 
-    private bool TryGetSpriteType(string text, out SpriteType res)
+    private bool TryMaterialNotes(out List<MaterialNote> result)
     {
-        try
-        {
-            res = (SpriteType)System.Enum.Parse(typeof(SpriteType), text);
-            return true;
-        }
-        catch (FormatException e)
-        {
-            Debug.LogError($"Parse error: {e}");
-            res = SpriteType.Sand;
-            return false;
-        }
-    }
-
-    private List<MaterialNotes> GetMaterialNotes()
-    {
-        return new List<MaterialNotes>();
+        return _materials.TryGetData(out result);
     }
 }
