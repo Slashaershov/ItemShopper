@@ -13,18 +13,41 @@ public class DemonstrateScreen : BaseScreen
     [SerializeField] private Text _discount;
     [SerializeField] private Text _cost;
     [SerializeField] private Image _bigImage;
+    [SerializeField] private Image _discountImage;
     [SerializeField] private SpriteConfigs _spriteConfigs;
     [SerializeField] List<MaterialSlotDemonstrator> _slots;
     public override void Show(ItemData itemData)
     {
         _name.text = itemData.Name;
         _description.text = itemData.Description;
-        _basePrice.text = itemData.BasePrice.ToString();
-        _discount.text = itemData.Discount.ToString();
-        _cost.text = itemData.Cost.ToString();
+        UpdateCost(itemData);
         _bigImage.sprite = GetSprite(itemData.BigSpriteType);
         UpdateSlots(itemData.MaterialNotes);
         base.Show(itemData);
+    }
+
+    private void UpdateCost(ItemData itemData)
+    {
+        if (itemData.Discount != 0)
+        {
+            SetActiveDiscount(true);
+            _discount.text = "-" + itemData.Discount.ToString() + "%";
+            _basePrice.text = itemData.BasePrice.ToString();
+            _cost.text = itemData.Cost.ToString();
+
+        }
+        else
+        {
+            SetActiveDiscount(false);
+            _cost.text ="$" + itemData.Cost.ToString();
+        }
+    }
+
+    private void SetActiveDiscount(bool state)
+    {
+        _discount.gameObject.SetActive(state);
+        _basePrice.gameObject.SetActive(state);
+        _discountImage.gameObject.SetActive(state);
     }
 
     private void UpdateSlots(List<MaterialNote> notes)

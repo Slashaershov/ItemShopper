@@ -9,7 +9,6 @@ using System;
 public class BasePriseInputField : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _inputField;
-    private const decimal decMaxValue = 0.99M;
     private void Start()
     {
         _inputField.onEndEdit.AddListener(CutValue);

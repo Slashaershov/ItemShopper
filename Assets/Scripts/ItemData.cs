@@ -10,8 +10,6 @@ public class ItemData
     public readonly float BasePrice;
     public readonly int Discount;
     public readonly BigSpriteType BigSpriteType;
-    public float Cost => GetCost();
-
 
     public ItemData (string name, string description, List<MaterialNote> materialNotes, 
         float basePrice, int discount, BigSpriteType bigSpriteType)
@@ -23,10 +21,11 @@ public class ItemData
         Discount = discount;
         BigSpriteType = bigSpriteType;
     }
+    public float Cost => CalcCost(BasePrice, Discount);
 
-    private float GetCost()
+    public static float CalcCost(float price, int discount)
     {
-        var res = BasePrice * (100 - Discount) / 100;
+        var res = price * (100 - discount) / 100;
         res = (float)Math.Round(res, 2);
         return res;
     }
