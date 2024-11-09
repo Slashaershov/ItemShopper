@@ -10,7 +10,7 @@ public class ScreenController : MonoBehaviour
     public void ActivateNext(ItemData data = null)
     {
         _screenNotes[_activeScreenIndex].Hide();
-        _activeScreenIndex++;
+        _activeScreenIndex = (_activeScreenIndex+1)% _screenNotes.Count;
         _screenNotes[_activeScreenIndex].Show(data);
     }
 

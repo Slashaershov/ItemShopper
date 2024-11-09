@@ -26,7 +26,7 @@ public class MaterialNoteView : MonoBehaviour
         {
             return false;
         }
-        MaterialSpriteType spriteType = MaterialSpriteType.Sand;
+        MaterialSpriteType spriteType = MaterialSpriteType.None;
         if (!TryGetMaterialSpriteType(out spriteType))
         {
             return false;

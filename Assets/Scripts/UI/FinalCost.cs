@@ -41,7 +41,6 @@ public class FinalCost : MonoBehaviour
 
     private void UpdateCost()
     {
-        Debug.LogError("UpdateCost");
         _text.text = CalculateCost().ToString();
     }
 

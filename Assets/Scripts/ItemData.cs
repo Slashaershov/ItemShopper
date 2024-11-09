@@ -35,17 +35,14 @@ public enum MaterialSpriteType
 {
     Grass = 1,
     Meat = 2,
-    Sand = 3,
+    Coal = 3,
     Stone = 4,
-    Wood = 5,
-
     None = 999,
 }
 
 public enum BigSpriteType
 {
     ConstructionKit = 1,
-    BeginnerBuildersKit = 2,
     Balls = 3,
     MoneySuitcase = 4,
     Pizza = 5,

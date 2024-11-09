@@ -21,5 +21,7 @@ public abstract class DropDownBySpriteEnumFiller<T> : MonoBehaviour where T : En
         {
             _dropDown.options.Add(new Dropdown.OptionData(x.ToString()));
         }
+        _dropDown.value = 0;
+        _dropDown.captionText.text = _dropDown.options[_dropDown.value].text;
     }
 }

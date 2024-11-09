@@ -13,12 +13,13 @@ public class OptionScreen : BaseScreen
     [SerializeField] private TMP_InputField _basePrice;
     [SerializeField] private Slider _discount;
     [SerializeField] private MaterialSlotsInputView _materials;
-
+    [SerializeField] private TMP_Text _errorText;
     public void Generate()
     {
         ItemData data;
         if (TryCreateData(out data))
         {
+            _errorText.gameObject.SetActive(false);
             ScreenController.Instance.ActivateNext(data);
         }
         else
@@ -33,23 +34,31 @@ public class OptionScreen : BaseScreen
         float cost;
         if (!TryGetCost(out cost))
         {
+            ShowError("Change base price value");
             return false;
         }
         BigSpriteType bigSprite;
         if (!TryGetBigSpriteType(out bigSprite))
         {
+            ShowError("Change bigSprite value");
             return false;
         }
 
         List<MaterialNote> materials;
         if (!TryMaterialNotes(out materials))
         {
+            ShowError("Change bigSprite value");
             return false;
         }
         data = new ItemData(_name.text, _description.text, materials, cost, (int)_discount.value, bigSprite);
         return true;
     }
 
+    private void ShowError(string msg)
+    {
+        _errorText.text = "Input error! " + msg;
+        _errorText.gameObject.SetActive(true);
+    }
     private bool TryGetCost(out float cost)
     {
         return Parser.TryParse(_basePrice.text, out cost) && cost >= 0;

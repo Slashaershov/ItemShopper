@@ -9,15 +9,22 @@ public class DemonstrateScreen : BaseScreen
 {
     [SerializeField] private TMP_Text _name;
     [SerializeField] private TMP_Text _description;
-    [SerializeField] private Text _basePrice;
+    [SerializeField] private TMP_Text _basePrice;
     [SerializeField] private Text _discount;
-    [SerializeField] private Text _cost;
+    [SerializeField] private TMP_Text _cost;
     [SerializeField] private Image _bigImage;
     [SerializeField] private Image _discountImage;
     [SerializeField] private SpriteConfigs _spriteConfigs;
     [SerializeField] List<MaterialSlotDemonstrator> _slots;
+    private ItemData _currentIem;
+    public void OnBuyButtonClick()
+    {
+        ScreenController.Instance.ActivateNext(_currentIem);
+    }
+
     public override void Show(ItemData itemData)
     {
+        _currentIem = itemData;
         _name.text = itemData.Name;
         _description.text = itemData.Description;
         UpdateCost(itemData);
@@ -58,6 +65,7 @@ public class DemonstrateScreen : BaseScreen
             {
                 var note = notes[i];
                 _slots[i].SetData(GetSprite(note.SpriteType), note.Count);
+                _slots[i].Enable();
             }
             else
             {
