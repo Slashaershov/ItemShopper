@@ -27,7 +27,7 @@ MonoBehaviour:
   _materialSpriteNotes:
     _notes:
     - _spriteType: 999
-      _sprite: {fileID: 21300000, guid: 888c23e9387210d4f885a0b078a318d8, type: 3}
+      _sprite: {fileID: 21300000, guid: 1830ef0004e213145bd03954026bb424, type: 3}
     - _spriteType: 1
       _sprite: {fileID: 21300000, guid: 0b8b453a87672dd4ca8cec5508387f61, type: 3}
     - _spriteType: 2
