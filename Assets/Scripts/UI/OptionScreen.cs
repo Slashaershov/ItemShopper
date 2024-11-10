@@ -47,7 +47,7 @@ public class OptionScreen : BaseScreen
         List<MaterialNote> materials;
         if (!TryMaterialNotes(out materials))
         {
-            ShowError("Change bigSprite value");
+            ShowError("Change slots data");
             return false;
         }
         data = new ItemData(_name.text, _description.text, materials, cost, (int)_discount.value, bigSprite);
