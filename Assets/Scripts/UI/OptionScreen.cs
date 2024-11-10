@@ -66,7 +66,8 @@ public class OptionScreen : BaseScreen
 
     private bool TryGetBigSpriteType(out BigSpriteType spriteType)
     {
-        return Parser.TryParse(_bigSprite.options[_bigSprite.value].text, out spriteType);
+        return Parser.TryParse(_bigSprite.options[_bigSprite.value].text, out spriteType)
+            && spriteType != BigSpriteType.None;
     }
 
     private bool TryMaterialNotes(out List<MaterialNote> result)

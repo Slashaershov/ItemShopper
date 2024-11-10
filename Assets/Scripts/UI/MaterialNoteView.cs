@@ -42,7 +42,8 @@ public class MaterialNoteView : MonoBehaviour
 
     private bool TryGetMaterialSpriteType(out MaterialSpriteType res)
     {
-        return Parser.TryParse(_dropDown.options[_dropDown.value].text, out res);
+        return Parser.TryParse(_dropDown.options[_dropDown.value].text, out res) 
+            && res!=MaterialSpriteType.None;
     }
 }
 
